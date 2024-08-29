@@ -27,27 +27,25 @@ function createTorus() {
 
 function setupLights() {
     const mainLight = new THREE.PointLight(0xffffff, 2); // Main Light
-    mainLight.position.set(5, 5, 5);
-
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Helper Light
-
-    scene.add(mainLight, ambientLight);
-
-    // Helpers
     const mainLightHelper = new THREE.PointLightHelper(mainLight);
     const gridHelper = new THREE.GridHelper(200, 50); // Adds Grid-like appearance
-    scene.add(mainLightHelper, gridHelper);
-
-    // Additional Lights
     const secondaryLight = new THREE.PointLight(0xffffff, 1.5);
-    secondaryLight.position.set(-20, 10, 10);
     const secondaryLightHelper = new THREE.PointLightHelper(secondaryLight);
-    scene.add(secondaryLight, secondaryLightHelper);
-
     const tertiaryLight = new THREE.PointLight(0xffffff, 1.5);
-    tertiaryLight.position.set(-10, 10, -10);
     const tertiaryLightHelper = new THREE.PointLightHelper(tertiaryLight);
-    scene.add(tertiaryLight, tertiaryLightHelper);
+
+    mainLight.position.set(5, 5, 5);
+    secondaryLight.position.set(-20, 10, 10);
+    tertiaryLight.position.set(-10, 10, -10);
+
+    scene.add(
+              mainLight,mainLightHelper,
+              secondaryLight,secondaryLightHelper,
+              tertiaryLight,tertiaryLightHelper, 
+              ambientLight,gridHelper
+             );
+    
 }
 
 function addStars() {
@@ -91,9 +89,9 @@ function createMoon() {
 function moveCamera() {
     const scrollPosition = document.body.getBoundingClientRect().top;
 
-    moon.rotation.x += 0.05;
+    moon.rotation.x += 0.005;
     moon.rotation.y += 0.075;
-    moon.rotation.z += 0.05;
+    moon.rotation.z += 0.005;
 
     profileCube.rotation.x += 0.01;
 
